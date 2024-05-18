@@ -14,13 +14,45 @@ export class CoreController {
   /**
    * Populate user to db
    *
-   * @returns {bool} - success response
+   * @returns {String} - success/failure response
    */
   @Post('populate-user')
   async populateUser(
     @Headers(AppConstants.privateApiHeaderKey) secret: string,
   ): Promise<ApiResponse> {
-    const response: boolean = await this.populateCoreDataScript.populateUser(
+    const response: String = await this.populateCoreDataScript.populateUser(
+      secret,
+    );
+
+    return setApiResponse(response);
+  }
+
+  /**
+   * Populate movies to db
+   *
+   * @returns {String} - success/failure response
+   */
+  @Post('populate-movies')
+  async populateMovies(
+    @Headers(AppConstants.privateApiHeaderKey) secret: string,
+  ): Promise<ApiResponse> {
+    const response: String = await this.populateCoreDataScript.populateMovies(
+      secret,
+    );
+
+    return setApiResponse(response);
+  }
+
+  /**
+   * Populate tv shows to db
+   *
+   * @returns {String} - success/failure response
+   */
+  @Post('populate-tvShows')
+  async populateTvShows(
+    @Headers(AppConstants.privateApiHeaderKey) secret: string,
+  ): Promise<ApiResponse> {
+    const response: String = await this.populateCoreDataScript.populateTvShows(
       secret,
     );
 
