@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { CoreModule } from './core/core.module';
+import { MyListModule } from './my-list/my-list.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CoreModule } from './core/core.module';
       `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.n5yokp0.mongodb.net/${process.env.DB_Name}`,
     ),
     CoreModule,
+    MyListModule,
   ],
   controllers: [],
   providers: [],
