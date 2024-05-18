@@ -7,7 +7,7 @@ import {
   MongoErrorCodes,
   errorCodeMap,
 } from '../constants/error-codes';
-import { ErrorLog } from 'src/interface/error/error.interface';
+import { ErrorLog } from 'src/error/interface/error.interface';
 
 @Injectable()
 export class ErrorHandlerService {

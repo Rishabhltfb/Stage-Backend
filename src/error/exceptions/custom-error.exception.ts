@@ -1,5 +1,5 @@
 import { BadRequestException, Logger } from '@nestjs/common';
-import { CustomError } from 'src/interface/error/error.interface';
+import { CustomError } from 'src/error/interface/error.interface';
 import { ApiResponse } from 'src/interface/response/api-response';
 import { ErrorCodes, errorCodeMap } from '../constants/error-codes';
 
