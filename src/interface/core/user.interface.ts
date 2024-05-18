@@ -1,5 +1,5 @@
-interface User {
-  id: string;
+interface UserDto {
+  id?: string;
   username: string;
   preferences: Preferences;
   watchHistory: Array<WatchHistory>;

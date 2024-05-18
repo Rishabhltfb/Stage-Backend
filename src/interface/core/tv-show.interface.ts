@@ -1,4 +1,4 @@
-interface TVShow {
+interface TVShowDto {
   id: string;
   title: string;
   description: string;

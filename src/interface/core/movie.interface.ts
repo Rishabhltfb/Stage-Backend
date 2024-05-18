@@ -1,4 +1,4 @@
-interface Movie {
+interface MovieDto {
   id: string;
   title: string;
   description: string;
