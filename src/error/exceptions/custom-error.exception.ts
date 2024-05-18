@@ -1,13 +1,13 @@
 import { BadRequestException, Logger } from '@nestjs/common';
 import { CustomError } from 'src/interface/error/error.interface';
 import { ApiResponse } from 'src/interface/response/api-response';
-import { errorCodeMap } from '../constants/error-codes';
+import { ErrorCodes, errorCodeMap } from '../constants/error-codes';
 
 export class CustomErrorException extends BadRequestException {
   private logger: Logger = new Logger(CustomErrorException.name, {
     timestamp: true,
   });
-  constructor(errorCode: string, errorMessage?: string) {
+  constructor(errorCode: ErrorCodes, errorMessage?: string) {
     const errResponse: ApiResponse = {
       success: false,
       error: new CustomError(

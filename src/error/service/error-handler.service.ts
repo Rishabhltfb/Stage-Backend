@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { CustomErrorException } from '../exceptions/custom-error.exception';
 import { ErrorHelperService } from './error-helper.service';
 import { LoggingService } from 'src/log/service/log.service';
-import { MongoErrorCodes, errorCodeMap } from '../constants/error-codes';
+import {
+  ErrorCodes,
+  MongoErrorCodes,
+  errorCodeMap,
+} from '../constants/error-codes';
 import { ErrorLog } from 'src/interface/error/error.interface';
 
 @Injectable()
@@ -16,11 +20,11 @@ export class ErrorHandlerService {
   /**
    * Handle all types of errors
    *
-   * @param {string} customErrorCode - custom err code
+   * @param {ErrorCodes} customErrorCode - custom err code
    * @param {any} err - error object
    * @throws {CustomErrorException} - handled custom error exception
    */
-  public handleError(customErrorCode: string, err: any): void {
+  public handleError(customErrorCode: ErrorCodes, err: any): void {
     if (err instanceof CustomErrorException) {
       // rethrow custom errors, need not to catch them
       throw err;
@@ -43,7 +47,7 @@ export class ErrorHandlerService {
   }
 
   // Handle MongoDB-specific errors
-  private handleMongoErrors(customErrorCode: string, err: any): void {
+  private handleMongoErrors(customErrorCode: ErrorCodes, err: any): void {
     // Filter what kind of error and based on that find error code and messages
     switch (err.name) {
       case 'ValidationError': {
@@ -104,7 +108,7 @@ export class ErrorHandlerService {
   }
 
   // Handle JavaScript reference errors
-  private handleRefrenceError(customErrorCode: string, err: any) {
+  private handleRefrenceError(customErrorCode: ErrorCodes, err: any) {
     this.loggingService.logActions('refrence error', err);
     const errorLog: ErrorLog = {
       code: customErrorCode,

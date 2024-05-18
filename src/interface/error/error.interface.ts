@@ -1,3 +1,4 @@
+import { ErrorCodes } from 'src/error/constants/error-codes';
 import { ErrorMessageConstants } from 'src/util/constants/err-msg.constant';
 
 export type ErrorLog = {
@@ -8,10 +9,10 @@ export type ErrorLog = {
 };
 
 export class CustomError {
-  private readonly errorCode: string;
+  private readonly errorCode: ErrorCodes;
   private readonly message: string;
 
-  constructor(errorCode?: string, message?: string) {
+  constructor(errorCode?: ErrorCodes, message?: string) {
     this.errorCode = errorCode;
     this.message = message ?? ErrorMessageConstants.SOMETHING_WENT_WRONG;
   }
