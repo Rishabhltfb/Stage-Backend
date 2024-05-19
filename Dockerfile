@@ -1,42 +1,26 @@
-FROM node:20-alpine
+# Base image
+FROM node:20
 
-# Set timezone as early as possible
-ENV TZ='Asia/Kolkata'
+# Create app directory
+WORKDIR /usr/src/app
 
-# Install necessary system dependencies
-RUN apk add --no-cache --virtual .build-deps alpine-sdk \
-    && apk add --no-cache tzdata
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
 
-RUN apk add python3
+# Install app dependencies
+RUN npm install
 
-# Install npm globally (outside container npm)
-RUN npm install -g npm
+# Bundle app source
+COPY . .
 
-# Install NestJS CLI globally
-RUN npm install -g @nestjs/cli
+# Copy the .env and .env.development files
+# COPY .env .env.development ./
 
-# Create app directory and set as working directory
-RUN mkdir -p /backend-app
-WORKDIR /backend-app
+# Creates a "dist" folder with the production build
+RUN npm run build
 
-# Copy package files first for efficient caching
-COPY package.json /backend-app
-COPY package-lock.json /backend-app
-
-# Install production dependencies for optimized image size
-RUN npm install --production --legacy-peer-deps
-
-# ARG STAGE=prod
-ENV STAGE=dev
-
-# Expose the application port (assuming it listens on port 3500)
+# Expose the port on which the app will run
 EXPOSE 3005
 
-# Copy application code
-COPY . /backend-app
-
-# Build the application
-RUN nest build app
-
-# Start the application
-CMD ["node", "dist/main.js"]
+# Start the server using the production build
+CMD ["npm", "run", "start:prod"]
