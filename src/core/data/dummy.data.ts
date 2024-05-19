@@ -79,6 +79,66 @@ export const dummyMovies: MovieDto[] = [
     director: 'Shawn Levy',
     actors: ['Ryan Reynolds', 'Mark Ruffalo', 'Jennifer Garner'],
   },
+  {
+    id: 'm8',
+    title: 'The Godfather',
+    description:
+      'The story of the Corleone family under patriarch Vito Corleone, focusing on the transformation of his youngest son, Michael, from reluctant family outsider to ruthless mafia boss.',
+    genres: [, 'Drama'],
+    releaseDate: new Date(1972, 3, 24),
+    director: 'Francis Ford Coppola',
+    actors: ['Marlon Brando', 'Al Pacino', 'James Caan'],
+  },
+  {
+    id: 'm9',
+    title: 'The Dark Knight',
+    description:
+      'With the help of Batman, Lieutenant James Gordon and District Attorney Harvey Dent fight crime in Gotham City. But a mysterious and sadistic criminal rises to threaten everything they believe in.',
+    genres: ['Action'],
+    releaseDate: new Date(2008, 7, 18),
+    director: 'Christopher Nolan',
+    actors: ['Christian Bale', 'Heath Ledger', 'Aaron Eckhart'],
+  },
+  {
+    id: 'm10',
+    title: "Schindler's List",
+    description:
+      'The true story of Oskar Schindler, a German businessman who saved the lives of over a thousand Jews during the Holocaust.',
+    genres: ['Drama'],
+    releaseDate: new Date(1993, 12, 15),
+    director: 'Steven Spielberg',
+    actors: ['Liam Neeson', 'Ralph Fiennes', 'Ben Kingsley'],
+  },
+  {
+    id: 'm11',
+    title: 'Pulp Fiction',
+    description:
+      "The lives of two mob hit men, a boxer, and a gangster's wife intertwine in a series of violent events across Los Angeles.",
+    genres: ['Comedy'],
+    releaseDate: new Date(1994, 9, 23),
+    director: 'Quentin Tarantino',
+    actors: ['John Travolta', 'Samuel L. Jackson', 'Uma Thurman'],
+  },
+  {
+    id: '12',
+    title: 'The Lord of the Rings: The Return of the King',
+    description:
+      "Gandalf and Aragorn lead the remaining forces of Good to war against Sauron's vast army in a desperate attempt to save Middle-earth.",
+    genres: ['Fantasy'],
+    releaseDate: new Date(2003, 12, 17),
+    director: 'Peter Jackson',
+    actors: ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom'],
+  },
+  {
+    id: 'm13',
+    title: 'The Matrix',
+    description:
+      'A computer hacker learns that the world he lives in is actually a computer simulation and joins a rebellion against the machines that control it.',
+    genres: ['SciFi', 'Action'],
+    releaseDate: new Date(1999, 3, 31),
+    director: 'The Wachowskis',
+    actors: ['Keanu Reeves', 'Laurence Fishburne', 'Carrie-Anne Moss'],
+  },
 ];
 
 // dummy data of 5 tv shows
