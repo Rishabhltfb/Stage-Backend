@@ -15,11 +15,9 @@ import { getConfiguration } from './config/get-configuration';
         },
       ],
       validationSchema: stageServerValidationSchema,
-      envFilePath: `.env.${process.env.STAGE}`,
+      envFilePath: `.env`,
     }),
-    MongooseModule.forRoot(
-      `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.n5yokp0.mongodb.net/${process.env.DB_Name}`,
-    ),
+    MongooseModule.forRoot(`${process.env.MONGO_DB_URI}`),
     CoreModule,
     MyListModule,
   ],
