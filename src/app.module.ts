@@ -3,11 +3,18 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { CoreModule } from './core/core.module';
 import { MyListModule } from './my-list/my-list.module';
+import stageServerValidationSchema from './config/config-schema';
+import { getConfiguration } from './config/get-configuration';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [],
+      load: [
+        () => {
+          return getConfiguration(stageServerValidationSchema);
+        },
+      ],
+      validationSchema: stageServerValidationSchema,
       envFilePath: `.env.${process.env.STAGE}`,
     }),
     MongooseModule.forRoot(

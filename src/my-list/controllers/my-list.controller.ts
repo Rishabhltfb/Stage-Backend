@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { ApiResponse } from 'src/interface/response/api-response';
@@ -17,6 +18,7 @@ import { RemoveItemResponse } from '../dtos/response/remove-item-res.dto';
 import { AppConstants } from 'src/util/constants/app.constant';
 import { MyListResponse } from '../dtos/response/my-list-res.dto';
 import { ContentType } from '../enums/content-type.enum';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 
 @Controller('api/v1/my-list')
 export class MyListController {
@@ -30,6 +32,7 @@ export class MyListController {
    * @returns {MyListResponse} - added item response data
    */
   @Get('')
+  @UseInterceptors(CacheInterceptor)
   async fetchMyList(
     @Query('page') page: number,
     @Query('perPage') perPage: number,
