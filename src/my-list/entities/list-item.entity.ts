@@ -3,6 +3,8 @@ import { User } from 'src/core/entities/user.entity';
 import { BaseModel } from 'src/interface/repository/base.model';
 import { ObjectId } from 'bson';
 import { ContentType } from '../enums/content-type.enum';
+import { Movie } from 'src/core/entities/movie.entity';
+import { TvShow } from 'src/core/entities/tv-show.entity';
 
 @Schema({ minimize: false, timestamps: true, id: true })
 export class ListItem extends BaseModel {
@@ -16,8 +18,11 @@ export class ListItem extends BaseModel {
   })
   contentType: ContentType;
 
-  @Prop({ type: String, required: true })
-  contentId: string;
+  @Prop({ type: ObjectId, ref: Movie.name })
+  movie: Movie;
+
+  @Prop({ type: ObjectId, ref: TvShow.name })
+  tvShow: TvShow;
 }
 
 export const ListItemSchema = SchemaFactory.createForClass(ListItem);

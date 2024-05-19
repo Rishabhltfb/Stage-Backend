@@ -4,5 +4,6 @@ import { ContentType } from '../enums/content-type.enum';
 export interface ListItemDto {
   user: Types.ObjectId;
   contentType: ContentType;
-  contentId: string;
+  movie?: Types.ObjectId;
+  tvShow?: Types.ObjectId;
 }
