@@ -27,5 +27,3 @@ export class ListItem extends BaseModel {
 
 export const ListItemSchema = SchemaFactory.createForClass(ListItem);
 ListItemSchema.index({ user: 1 });
-ListItemSchema.index({ contentId: 1 });
-ListItemSchema.index({ user: 1, contentId: 1 });
