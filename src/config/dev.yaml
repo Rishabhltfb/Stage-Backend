@@ -1,0 +1,7 @@
+redis:
+  host: localhost # use "redis" as host with docker compose & "localhost" when running using npm scripts
+  port: 6379
+  ttl: 3600 # 1 hour
+  db: 0
+  username: default
+  password: redis-password-here
