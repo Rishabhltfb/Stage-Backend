@@ -10,6 +10,8 @@ import { ErrorCodes } from 'src/error/constants/error-codes';
 import { ListItemDto } from '../interfaces/list-item.dto';
 import { CustomErrorException } from 'src/error/exceptions/custom-error.exception';
 import { RemoveItemResponse } from '../dtos/response/remove-item-res.dto';
+import { Types } from 'mongoose';
+import { MyListResponse } from '../dtos/response/my-list-res.dto';
 
 @Injectable()
 export class MyListService {
@@ -19,6 +21,47 @@ export class MyListService {
     private readonly errorHandlerService: ErrorHandlerService,
     private myListHelperService: MyListHelperService,
   ) {}
+
+  /**
+   * fetch paginated my list for the provided user
+   *
+   * @param {string} userId - user id to filter out my list
+   * @param {number} page - page for which list needs to be fetched
+   * @param {number} perPage - list items per page
+   * @returns {MyListResponse} paginated my list
+   */
+  public async fetchMyList(
+    userId: string,
+    page?: number,
+    perPage?: number,
+  ): Promise<MyListResponse> {
+    page = isNaN(page) ? 1 : page;
+    perPage = isNaN(perPage) ? 5 : perPage;
+    const user = new Types.ObjectId(userId);
+
+    // TODO: check if exists in cache
+
+    let listItems: ListItem[] = [];
+    try {
+      listItems = await this.listItemRepository.fetchMyList(
+        user,
+        page,
+        perPage,
+      );
+    } catch (err) {
+      this.errorHandlerService.handleError(ErrorCodes.EC_0000, err);
+    }
+
+    // generate added list item response
+    const myList: MyListResponse =
+      await this.myListHelperService.generateMyListResponse(
+        page,
+        perPage,
+        listItems,
+      );
+
+    return myList;
+  }
 
   /**
    * add new item to my list using content id
