@@ -36,6 +36,10 @@ $ npm install
 ## Running the app
 
 ```bash
+
+# run server using docker compose after building
+$ docker compose up --build
+
 # development
 $ npm run start
 
