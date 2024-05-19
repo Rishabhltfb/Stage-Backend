@@ -9,6 +9,7 @@ import { MyListHelperService } from './my-list-helper.service';
 import { ErrorCodes } from 'src/error/constants/error-codes';
 import { ListItemDto } from '../interfaces/list-item.dto';
 import { CustomErrorException } from 'src/error/exceptions/custom-error.exception';
+import { RemoveItemResponse } from '../dtos/response/remove-item-res.dto';
 
 @Injectable()
 export class MyListService {
@@ -63,12 +64,19 @@ export class MyListService {
    * @param {string} id - id as unique identifier for List Item document
    * @returns {boolean} - deletion success status
    */
-  public async deleteUser(id: string): Promise<boolean> {
+  public async removeListItem(id: string): Promise<RemoveItemResponse> {
     // TODO: delete entry from cache
 
     // delete from db
-    const response = await this.listItemRepository.deleteListItem(id);
-    this.loggingService.debugLog('Delete from db response', response);
-    return true;
+    try {
+      const response = await this.listItemRepository.deleteListItem(id);
+      this.loggingService.debugLog('Delete from db response', response);
+      const removed: boolean =
+        response != null && response._id.toString() == id;
+
+      return { removed, itemCount: removed ? 1 : 0 };
+    } catch (err) {
+      this.errorHandlerService.handleError(ErrorCodes.EC_0000, err);
+    }
   }
 }
