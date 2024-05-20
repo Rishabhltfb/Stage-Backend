@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ErrorCodes } from 'src/error/constants/error-codes';
-import { ErrorHandlerService } from 'src/error/service/error-handler.service';
+import { ErrorCodes } from '../../error/constants/error-codes';
+import { ErrorHandlerService } from '../../error/service/error-handler.service';
 import { MovieRepository } from '../repositories/movie.repository';
 
 @Injectable()

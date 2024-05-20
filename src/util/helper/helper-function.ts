@@ -1,4 +1,4 @@
-import { ApiResponse } from 'src/interface/response/api-response';
+import { ApiResponse } from '../../interface/response/api-response';
 
 export const setApiResponse = (data: any): ApiResponse => {
   console.log(`Response [200]: ${JSON.stringify(data)}`);

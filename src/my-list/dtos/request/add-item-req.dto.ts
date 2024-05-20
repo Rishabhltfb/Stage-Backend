@@ -1,5 +1,5 @@
 import { IsEnum, IsString } from 'class-validator';
-import { ContentType } from 'src/my-list/enums/content-type.enum';
+import { ContentType } from '../../enums/content-type.enum';
 
 export class AddListItemRequestBody {
   @IsString()

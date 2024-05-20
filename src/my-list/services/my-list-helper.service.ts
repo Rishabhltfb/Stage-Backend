@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { ErrorHandlerService } from 'src/error/service/error-handler.service';
-import { LoggingService } from 'src/log/service/log.service';
+import { ErrorHandlerService } from '../../error/service/error-handler.service';
+import { LoggingService } from '../../log/service/log.service';
 import { AddListItemRequestBody } from '../dtos/request/add-item-req.dto';
 import { ListItemDto } from '../interfaces/list-item.dto';
 import { Types } from 'mongoose';
-import { AppConstants } from 'src/util/constants/app.constant';
+import { AppConstants } from '../../util/constants/app.constant';
 import { ListItem } from '../entities/list-item.entity';
 import { AddItemResponse } from '../dtos/response/add-item-res.dto';
 import {
@@ -12,9 +12,9 @@ import {
   MyListResponse,
 } from '../dtos/response/my-list-res.dto';
 import { ContentType } from '../enums/content-type.enum';
-import { Movie } from 'src/core/entities/movie.entity';
-import { TvShow } from 'src/core/entities/tv-show.entity';
-import { RedisCacheService } from 'src/cache';
+import { Movie } from '../../core/entities/movie.entity';
+import { TvShow } from '../../core/entities/tv-show.entity';
+import { RedisCacheService } from '../../cache';
 
 @Injectable()
 export class MyListHelperService {
@@ -53,6 +53,8 @@ export class MyListHelperService {
     list: ListItem[],
   ): Promise<MyListResponse> {
     const listItemResponses: ListItemResponse[] = [];
+
+    // populate list items with movie & tv show data usign fks
     for (let i = 0; i < list.length; i += 1) {
       let item: ListItem = list[i];
       const { contentType } = item;

@@ -1,9 +1,9 @@
 import { Controller, Headers, Post } from '@nestjs/common';
 
-import { ApiResponse } from 'src/interface/response/api-response';
-import { setApiResponse } from 'src/util/helper/helper-function';
+import { ApiResponse } from '../../interface/response/api-response';
+import { setApiResponse } from '../../util/helper/helper-function';
 import { PopulateCoreDataScript } from '../scripts/populate-core-data.script';
-import { AppConstants } from 'src/util/constants/app.constant';
+import { AppConstants } from '../../util/constants/app.constant';
 
 @Controller('api/v1/core')
 export class CoreController {

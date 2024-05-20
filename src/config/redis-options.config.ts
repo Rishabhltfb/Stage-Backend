@@ -1,4 +1,4 @@
-import { AppConstants } from 'src/util/constants/app.constant';
+import { AppConstants } from '../util/constants/app.constant';
 
 export const getRedisOptionsWithConfig = (config) => {
   const username = process.env.REDIS_USERNAME;

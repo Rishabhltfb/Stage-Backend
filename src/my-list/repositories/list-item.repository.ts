@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { BaseRepository } from 'src/interface/repository/base.abstract.repository';
+import { BaseRepository } from '../../interface/repository/base.abstract.repository';
 import { ListItem } from '../entities/list-item.entity';
 import { ListItemDto } from '../interfaces/list-item.dto';
 

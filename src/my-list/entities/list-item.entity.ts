@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { User } from 'src/core/entities/user.entity';
-import { BaseModel } from 'src/interface/repository/base.model';
+import { User } from '../../core/entities/user.entity';
+import { BaseModel } from '../../interface/repository/base.model';
 import { ObjectId } from 'bson';
 import { ContentType } from '../enums/content-type.enum';
-import { Movie } from 'src/core/entities/movie.entity';
-import { TvShow } from 'src/core/entities/tv-show.entity';
+import { Movie } from '../../core/entities/movie.entity';
+import { TvShow } from '../../core/entities/tv-show.entity';
 
 @Schema({ minimize: false, timestamps: true, id: true })
 export class ListItem extends BaseModel {

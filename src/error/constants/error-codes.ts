@@ -1,4 +1,4 @@
-import { ErrorMessageConstants } from 'src/util/constants/err-msg.constant';
+import { ErrorMessageConstants } from '../../util/constants/err-msg.constant';
 
 export class MongoErrorCodes {
   static DUPLICATE_KEY = 11000;

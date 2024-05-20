@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CustomErrorException } from '../exceptions/custom-error.exception';
 import { ErrorHelperService } from './error-helper.service';
-import { LoggingService } from 'src/log/service/log.service';
+import { LoggingService } from '../../log/service/log.service';
 import {
   ErrorCodes,
   MongoErrorCodes,
   errorCodeMap,
 } from '../constants/error-codes';
-import { ErrorLog } from 'src/error/interface/error.interface';
+import { ErrorLog } from '../interface/error.interface';
 
 @Injectable()
 export class ErrorHandlerService {

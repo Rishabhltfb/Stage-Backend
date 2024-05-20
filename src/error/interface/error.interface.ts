@@ -1,5 +1,5 @@
-import { ErrorCodes } from 'src/error/constants/error-codes';
-import { ErrorMessageConstants } from 'src/util/constants/err-msg.constant';
+import { ErrorCodes } from '../constants/error-codes';
+import { ErrorMessageConstants } from '../../util/constants/err-msg.constant';
 
 export type ErrorLog = {
   code: number | string;

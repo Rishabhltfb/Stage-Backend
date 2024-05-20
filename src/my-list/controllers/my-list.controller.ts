@@ -9,13 +9,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 
-import { ApiResponse } from 'src/interface/response/api-response';
-import { setApiResponse } from 'src/util/helper/helper-function';
+import { ApiResponse } from '../../interface/response/api-response';
+import { setApiResponse } from '../../util/helper/helper-function';
 import { AddListItemRequestBody } from '../dtos/request/add-item-req.dto';
 import { AddItemResponse } from '../dtos/response/add-item-res.dto';
 import { MyListService } from '../services/my-list.service';
 import { RemoveItemResponse } from '../dtos/response/remove-item-res.dto';
-import { AppConstants } from 'src/util/constants/app.constant';
+import { AppConstants } from '../../util/constants/app.constant';
 import { MyListResponse } from '../dtos/response/my-list-res.dto';
 import { ContentType } from '../enums/content-type.enum';
 import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';

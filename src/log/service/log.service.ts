@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ConsoleColors } from 'src/util/constants/console-color.contant';
+import { ConsoleColors } from '../../util/constants/console-color.contant';
 
 @Injectable()
 export class LoggingService {

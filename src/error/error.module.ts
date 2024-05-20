@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { LogModule } from 'src/log/log.module';
+import { LoggingService } from '../log/service/log.service';
 import { ErrorHandlerService } from './service/error-handler.service';
-import { LoggingService } from 'src/log/service/log.service';
 import { ErrorHelperService } from './service/error-helper.service';
 
 @Module({
-  imports: [LogModule],
+  imports: [],
   controllers: [],
   providers: [ErrorHandlerService, LoggingService, ErrorHelperService],
   exports: [ErrorHandlerService],

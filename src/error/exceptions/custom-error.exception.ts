@@ -1,6 +1,6 @@
 import { BadRequestException, Logger } from '@nestjs/common';
-import { CustomError } from 'src/error/interface/error.interface';
-import { ApiResponse } from 'src/interface/response/api-response';
+import { CustomError } from '../interface/error.interface';
+import { ApiResponse } from '../../interface/response/api-response';
 import { ErrorCodes, errorCodeMap } from '../constants/error-codes';
 
 export class CustomErrorException extends BadRequestException {

@@ -7,8 +7,8 @@ import { MyListService } from './services/my-list.service';
 import { MyListHelperService } from './services/my-list-helper.service';
 import { MyListController } from './controllers/my-list.controller';
 import { ListItemRepository } from './repositories/list-item.repository';
-import { RedisCacheModule } from 'src/cache';
-import { CoreModule } from 'src/core/core.module';
+import { RedisCacheModule } from '../cache';
+import { CoreModule } from '../core/core.module';
 
 @Module({
   imports: [

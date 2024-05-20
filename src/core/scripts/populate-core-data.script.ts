@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
-import { LoggingService } from 'src/log/service/log.service';
-import { ErrorHandlerService } from 'src/error/service/error-handler.service';
-import { ErrorCodes } from 'src/error/constants/error-codes';
-import { CustomErrorException } from 'src/error/exceptions/custom-error.exception';
+import { LoggingService } from '../../log/service/log.service';
+import { ErrorHandlerService } from '../../error/service/error-handler.service';
+import { ErrorCodes } from '../../error/constants/error-codes';
+import { CustomErrorException } from '../../error/exceptions/custom-error.exception';
 import { dummyMovies, dummyTvShows, dummyUser } from '../data/dummy.data';
 import { MovieRepository } from '../repositories/movie.repository';
 import { TvShowRepository } from '../repositories/tv-shows.repository';

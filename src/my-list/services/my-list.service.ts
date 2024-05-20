@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Types } from 'mongoose';
-import { MovieService } from 'src/core/services/movie.service';
-import { TvShowService } from 'src/core/services/tv-show.service';
-import { ErrorCodes } from 'src/error/constants/error-codes';
-import { CustomErrorException } from 'src/error/exceptions/custom-error.exception';
-import { ErrorHandlerService } from 'src/error/service/error-handler.service';
-import { LoggingService } from 'src/log/service/log.service';
+import { MovieService } from '../../core/services/movie.service';
+import { TvShowService } from '../../core/services/tv-show.service';
+import { ErrorCodes } from '../../error/constants/error-codes';
+import { CustomErrorException } from '../../error/exceptions/custom-error.exception';
+import { ErrorHandlerService } from '../../error/service/error-handler.service';
+import { LoggingService } from '../../log/service/log.service';
 import { AddListItemRequestBody } from '../dtos/request/add-item-req.dto';
 import { AddItemResponse } from '../dtos/response/add-item-res.dto';
 import { MyListResponse } from '../dtos/response/my-list-res.dto';

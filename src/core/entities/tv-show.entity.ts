@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { BaseModel } from 'src/interface/repository/base.model';
+import { BaseModel } from '../../interface/repository/base.model';
 
 @Schema({ minimize: false, timestamps: true, id: true })
 export class TvShow extends BaseModel {
