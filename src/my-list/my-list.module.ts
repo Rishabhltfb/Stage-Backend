@@ -8,6 +8,7 @@ import { MyListHelperService } from './services/my-list-helper.service';
 import { MyListController } from './controllers/my-list.controller';
 import { ListItemRepository } from './repositories/list-item.repository';
 import { RedisCacheModule } from 'src/cache';
+import { CoreModule } from 'src/core/core.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { RedisCacheModule } from 'src/cache';
     LogModule,
     ErrorHandlerModule,
     RedisCacheModule,
+    CoreModule,
   ],
   controllers: [MyListController],
   providers: [MyListService, MyListHelperService, ListItemRepository],
