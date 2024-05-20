@@ -11,7 +11,6 @@ import { ErrorLog } from 'src/error/interface/error.interface';
 
 @Injectable()
 export class ErrorHandlerService {
-  // TODO: Use this service to handle errors everywhere
   constructor(
     private errorHelperService: ErrorHelperService,
     private loggingService: LoggingService,

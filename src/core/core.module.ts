@@ -10,6 +10,8 @@ import { Movie, MovieSchema } from './entities/movie.entity';
 import { TvShow, TvShowSchema } from './entities/tv-show.entity';
 import { MovieRepository } from './repositories/movie.repository';
 import { TvShowRepository } from './repositories/tv-shows.repository';
+import { MovieService } from './services/movie.service';
+import { TvShowService } from './services/tv-show.service';
 
 @Module({
   imports: [
@@ -27,7 +29,9 @@ import { TvShowRepository } from './repositories/tv-shows.repository';
     UserRepository,
     MovieRepository,
     TvShowRepository,
+    MovieService,
+    TvShowService,
   ],
-  exports: [],
+  exports: [MovieService, TvShowService],
 })
 export class CoreModule {}

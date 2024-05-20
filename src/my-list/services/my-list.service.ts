@@ -1,21 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { AddListItemRequestBody } from '../dtos/request/add-item-req.dto';
-import { ListItemRepository } from '../repositories/list-item.repository';
-import { LoggingService } from 'src/log/service/log.service';
-import { ErrorHandlerService } from 'src/error/service/error-handler.service';
-import { ListItem } from '../entities/list-item.entity';
-import { AddItemResponse } from '../dtos/response/add-item-res.dto';
-import { MyListHelperService } from './my-list-helper.service';
-import { ErrorCodes } from 'src/error/constants/error-codes';
-import { ListItemDto } from '../interfaces/list-item.dto';
-import { CustomErrorException } from 'src/error/exceptions/custom-error.exception';
-import { RemoveItemResponse } from '../dtos/response/remove-item-res.dto';
 import { Types } from 'mongoose';
+import { MovieService } from 'src/core/services/movie.service';
+import { TvShowService } from 'src/core/services/tv-show.service';
+import { ErrorCodes } from 'src/error/constants/error-codes';
+import { CustomErrorException } from 'src/error/exceptions/custom-error.exception';
+import { ErrorHandlerService } from 'src/error/service/error-handler.service';
+import { LoggingService } from 'src/log/service/log.service';
+import { AddListItemRequestBody } from '../dtos/request/add-item-req.dto';
+import { AddItemResponse } from '../dtos/response/add-item-res.dto';
 import { MyListResponse } from '../dtos/response/my-list-res.dto';
+import { RemoveItemResponse } from '../dtos/response/remove-item-res.dto';
+import { ListItem } from '../entities/list-item.entity';
+import { ContentType } from '../enums/content-type.enum';
+import { ListItemDto } from '../interfaces/list-item.dto';
+import { ListItemRepository } from '../repositories/list-item.repository';
+import { MyListHelperService } from './my-list-helper.service';
 
 @Injectable()
 export class MyListService {
   constructor(
+    private movieService: MovieService,
+    private tvShowService: TvShowService,
     private listItemRepository: ListItemRepository,
     private loggingService: LoggingService,
     private readonly errorHandlerService: ErrorHandlerService,
@@ -38,8 +43,6 @@ export class MyListService {
     page = isNaN(page) ? 1 : page;
     perPage = isNaN(perPage) ? 5 : perPage;
     const user = new Types.ObjectId(userId);
-
-    // TODO: check if exists in cache
 
     let listItems: ListItem[] = [];
     try {
@@ -72,13 +75,29 @@ export class MyListService {
   public async addListItem(
     addListItemRequestBody: AddListItemRequestBody,
   ): Promise<AddItemResponse> {
-    // TODO: validate if content id vaild
+    // validate if content id provided is valid
+    const { contentId, contentType } = addListItemRequestBody;
+    let exists: boolean = false;
+    if (contentType == ContentType.MOVIE) {
+      exists = await this.movieService.movieExists(contentId);
+    } else {
+      exists = await this.tvShowService.tvShowExists(contentId);
+    }
 
+    if (!exists) {
+      throw new CustomErrorException(ErrorCodes.EC_0002);
+    }
+
+    // Invalidate my list cache
+    this.myListHelperService.invalidateMyListCache();
+
+    // prepare dto to add to db
     const listItemDto: ListItemDto =
       this.myListHelperService.convertAddItemRequestToDto(
         addListItemRequestBody,
       );
 
+    // add list item to my list in db
     let listItem: ListItem = null;
     try {
       listItem = await this.listItemRepository.addItem(listItemDto);
@@ -108,7 +127,8 @@ export class MyListService {
    * @returns {boolean} - deletion success status
    */
   public async removeListItem(id: string): Promise<RemoveItemResponse> {
-    // TODO: delete entry from cache
+    // Invalidate my list cache
+    this.myListHelperService.invalidateMyListCache();
 
     // delete from db
     try {
