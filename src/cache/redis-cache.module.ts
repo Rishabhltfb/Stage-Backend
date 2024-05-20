@@ -14,7 +14,7 @@ import { ScheduleModule } from '@nestjs/schedule';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        return await getRedisOptions(configService, {
+        return await getRedisOptions({
           store: redisStore,
         });
       },
@@ -24,7 +24,7 @@ import { ScheduleModule } from '@nestjs/schedule';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        return await getRedisOptions(configService);
+        return await getRedisOptions();
       },
     }),
     ScheduleModule.forRoot(),
