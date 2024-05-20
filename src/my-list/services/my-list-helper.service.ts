@@ -24,6 +24,10 @@ export class MyListHelperService {
     private redisCacheService: RedisCacheService,
   ) {}
 
+  /**
+   * clear my list cache from redis store
+   *
+   */
   public async invalidateMyListCache() {
     const allRedisKeys = await this.redisCacheService.allKeys();
     for (let index in allRedisKeys) {
@@ -35,6 +39,14 @@ export class MyListHelperService {
     this.loggingService.logInfo('Invalidated my list cache');
   }
 
+  /**
+   * generate my list response from list items entity objects
+   *
+   * @param {number} page - list page
+   * @param {number} perPage - list items per page
+   * @param {ListItem[]} list - my list items entity objects
+   * @returns {MyListResponse} return my list response
+   */
   public async generateMyListResponse(
     page: number,
     perPage: number,
@@ -83,6 +95,12 @@ export class MyListHelperService {
     return mylist;
   }
 
+  /**
+   * convert add item request body to list item dto
+   *
+   * @param {AddListItemRequestBody} addListItemRequestBody - add list item req body
+   * @returns {ListItemDto} list item dto
+   */
   public convertAddItemRequestToDto(
     addListItemRequestBody: AddListItemRequestBody,
   ): ListItemDto {
@@ -100,6 +118,12 @@ export class MyListHelperService {
     return listItemDto;
   }
 
+  /**
+   * generate add list item response from list item entity
+   *
+   * @param {ListItem} listItem - list item entity object
+   * @returns {AddItemResponse} add item response
+   */
   public generateAddListItemResponse(listItem: ListItem): AddItemResponse {
     const { _id: id } = listItem;
 
