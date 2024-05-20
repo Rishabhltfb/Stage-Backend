@@ -89,7 +89,7 @@ export class MyListService {
     }
 
     // validate if content already part of my list
-    this.contentAlreadyExists(contentType, contentId);
+    await this.contentAlreadyExists(contentType, contentId);
 
     // Invalidate my list cache
     this.myListHelperService.invalidateMyListCache();
@@ -130,18 +130,19 @@ export class MyListService {
    * @param {string} id - id as unique identifier for content (movie or tv show)
    * @returns {boolean} - deletion success status
    */
-  private async contentAlreadyExists(
-    contentType: ContentType,
-    id: string,
-  ): Promise<boolean> {
+  private async contentAlreadyExists(contentType: ContentType, id: string) {
     let existingItem = null;
     if (contentType == ContentType.MOVIE) {
-      existingItem = await this.listItemRepository.find({ movie: id });
+      existingItem = await this.listItemRepository.find({
+        movie: new Types.ObjectId(id),
+      });
     } else {
-      existingItem = await this.listItemRepository.find({ tvShow: id });
+      existingItem = await this.listItemRepository.find({
+        tvShow: new Types.ObjectId(id),
+      });
     }
 
-    if (!existingItem) {
+    if (existingItem == null || existingItem.length == 0) {
       return false;
     }
 
