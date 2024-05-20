@@ -30,4 +30,8 @@ export class RedisCacheService {
   async reset() {
     return this.cache.reset();
   }
+
+  async allKeys() {
+    return this.cache.store.keys();
+  }
 }

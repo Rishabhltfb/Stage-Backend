@@ -11,6 +11,7 @@ export interface MyListResponse {
 }
 
 export interface ListItemResponse {
+  id: string;
   contentType: ContentType;
   content: Movie | TvShow;
 }

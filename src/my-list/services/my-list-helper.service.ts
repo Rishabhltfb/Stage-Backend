@@ -14,13 +14,26 @@ import {
 import { ContentType } from '../enums/content-type.enum';
 import { Movie } from 'src/core/entities/movie.entity';
 import { TvShow } from 'src/core/entities/tv-show.entity';
+import { RedisCacheService } from 'src/cache';
 
 @Injectable()
 export class MyListHelperService {
   constructor(
     private loggingService: LoggingService,
     private readonly errorHandlerService: ErrorHandlerService,
+    private redisCacheService: RedisCacheService,
   ) {}
+
+  public async invalidateMyListCache() {
+    const allRedisKeys = await this.redisCacheService.allKeys();
+    for (let index in allRedisKeys) {
+      const key = allRedisKeys[index];
+      if (key.includes(AppConstants.controllerKey)) {
+        this.redisCacheService.del(key);
+      }
+    }
+    this.loggingService.logInfo('Invalidated my list cache');
+  }
 
   public async generateMyListResponse(
     page: number,
@@ -52,6 +65,7 @@ export class MyListHelperService {
       }
 
       const listItemResponse: ListItemResponse = {
+        id: item._id.toString(),
         contentType: contentType,
         content: content,
       };
