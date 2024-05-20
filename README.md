@@ -65,6 +65,8 @@ REDIS_TTL: The default expiration time for cached data in Redis (in ms)
 
 REDIS_PASSWORD: Password for your Redis server (optional, only needed for secured deployments)
 ```
+All of these environment variables and keys will be provided separately via the project maintainer. Please reach out to `rishabhsharma.rs0403@gmail.com` for the same.
+
 
 ## Strategy and Assumptions
 
@@ -106,6 +108,8 @@ The performance of the `/api/v1/my-list` endpoint, particularly its response tim
 
 - **MongoDB Cloud Instance:** The configuration and specifications of your MongoDB cloud instance (e.g., instance type, storage options) can impact database query performance, which in turn affects the `/api/v1/my-list` endpoint.
 
+- **Data Size:** The size of the data fetched plays a crucial role in the response time as it directly depends on the network bandwidth and more data in terms of document size will increase the response time significantly.
+
 **Observed Performance:**
 
 While it's difficult to provide a definitive response time guarantee due to the factors mentioned above, here's an observation based on a specific environment:
@@ -125,9 +129,12 @@ I recommend testing and evaluating the application's performance in your target 
 
 ## Stress Testing
 
-<img width="1437" alt="stress testing" src="https://github.com/Rishabhltfb/Stage-Backend/assets/40674238/ffb81fd5-27bb-4977-bb0c-3f35a408fff3">
+<img width="500" alt="stress-test-local-7ms" src="https://github.com/Rishabhltfb/Stage-Backend/assets/40674238/cb6622b5-52a7-4ac5-8259-aa1376dba868">
+<img width="500" alt="stress-test-hosted-44ms" src="https://github.com/Rishabhltfb/Stage-Backend/assets/40674238/8fdf05f8-0be3-4386-89e8-febeef93f474">
 
-To assess performance under realistic conditions, the `/api/v1/my-list` (fetch my list) API was subjected to load testing. This load testing is performed on the hosted server. The test simulated 100 concurrent virtual users sending a total of `3644 requests` within a minute. The overall average response time was a promising `55ms`. However, it's important to note a potential outlier: the first request to MongoDB exhibited a longer response time of `4675ms`. This is due to factors like cold cache or database initialization overhead and the min response time for a request was `2ms`.
+
+
+To assess performance under realistic conditions, the `/api/v1/my-list` (fetch my list) API was subjected to load testing. This load testing is performed on both local and hosted server. The test simulated 100 concurrent virtual users sending a total of `~4600 requests` within a minute in both the cases. The overall average response time was a promising `7ms` in local and `44ms` in hosted server. However, it's important to note a potential outlier: the first request to MongoDB exhibited a longer response time of `950ms`. This is due to factors like cold cache or database initialization overhead and the minimum response time for a request was `2ms`.
 
 ## Running the Application
 
