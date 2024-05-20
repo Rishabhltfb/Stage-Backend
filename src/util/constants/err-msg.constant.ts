@@ -5,5 +5,6 @@ export class ErrorMessageConstants {
   static MOVIE_NOT_AVAILABLE = 'Unable to find movie!';
   static TV_SHOW_NOT_AVAILABLE = 'Unable to find tv show!';
   static CONTENT_NOT_AVAILABLE = 'Content is not available!';
+  static CONTENT_ALREAY_EXISTS = 'Content already part of my list!';
   static DUPLICATE_ENTRY = 'Unique field violation error!';
 }

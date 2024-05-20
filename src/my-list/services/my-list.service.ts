@@ -85,8 +85,11 @@ export class MyListService {
     }
 
     if (!exists) {
-      throw new CustomErrorException(ErrorCodes.EC_0002);
+      throw new CustomErrorException(ErrorCodes.EC_0004);
     }
+
+    // validate if content already part of my list
+    this.contentAlreadyExists(contentType, contentId);
 
     // Invalidate my list cache
     this.myListHelperService.invalidateMyListCache();
@@ -118,6 +121,33 @@ export class MyListService {
       this.myListHelperService.generateAddListItemResponse(listItem);
 
     return addItemResponse;
+  }
+
+  /**
+   * Checks if content already exists in the db
+   *
+   * @param {ContentType} contentType - content type of the item that need to be added
+   * @param {string} id - id as unique identifier for content (movie or tv show)
+   * @returns {boolean} - deletion success status
+   */
+  private async contentAlreadyExists(
+    contentType: ContentType,
+    id: string,
+  ): Promise<boolean> {
+    let existingItem = null;
+    if (contentType == ContentType.MOVIE) {
+      existingItem = await this.listItemRepository.find({ movie: id });
+    } else {
+      existingItem = await this.listItemRepository.find({ tvShow: id });
+    }
+
+    if (!existingItem) {
+      return false;
+    }
+
+    // if content is already part of my list then return bad request err
+    this.loggingService.logInfo('Content already part of my list!');
+    throw new CustomErrorException(ErrorCodes.EC_0005);
   }
 
   /**
