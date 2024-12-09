@@ -24,7 +24,7 @@
 
 ## Stage Project
 
-This repository is a Node.js application built with NestJS, a powerful framework for building scalable and efficient server-side applications. It utilizes various technologies to ensure performance, reliability, and ease of deployment.
+This repository is a Node.js application built with NestJS, a very powerful framework for building scalable and efficient server-side applications. It utilizes various technologies to ensure performance, reliability, and ease of deployment.
 
 ## Tech Stack:
 
