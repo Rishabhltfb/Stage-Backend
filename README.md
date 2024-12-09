@@ -193,7 +193,7 @@ $ npm run test:cov
 
 ## CI/CD Workflow
 
-This project uses github actions for automantic deployment to AWS when code is pushed to the main branch. Github repository includes AWS secrets.
+This project uses GitHub actions for automatic deployment to AWS when code is pushed to the main branch. The Github repository includes AWS secrets.
 
 ## Deployment
 
